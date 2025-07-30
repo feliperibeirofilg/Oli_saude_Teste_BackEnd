@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: teste_oliSaude
+    volumes:
+      - .:/var/www/html
+    networks:
+      - laravel_network
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=db
+      - DB_DATABASE=oli_saude
+      - DB_USERNAME=oli_saude
+      - DB_PASSWORD=secret
+
+  web:
+    image: nginx:latest
+    container_name: laravelOS_web
+    ports:
+      - "2010:80"
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - laravel_network
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: bd_oli_saude
+    environment:
+      - MYSQL_DATABASE=oli_saude
+      - MYSQL_USER=oli_saude
+      - MYSQL_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - laravel_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:latest
+    container_name: laravelOS_redis
+    networks:
+      - laravel_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: oliSaude_phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: oli_saude
+      PMA_PASSWORD: 123456
+    ports:
+      - "2020:80"
+    depends_on:
+      - db
+    networks:
+      - laravel_network
+
+volumes:
+  db_data:
+
+networks:
+  laravel_network:
+    driver: bridge
