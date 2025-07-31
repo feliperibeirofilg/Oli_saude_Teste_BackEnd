@@ -25,7 +25,7 @@ class ClienteController extends Controller
                 'sexo' => $request->sexo
             ]);
 
-            //Return view
+            return view('/welcome');
         }
 
     public function editarCliente($id){
