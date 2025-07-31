@@ -21,7 +21,7 @@ services:
       - DB_HOST=db
       - DB_DATABASE=oli_saude
       - DB_USERNAME=oli_saude
-      - DB_PASSWORD=secret
+      - DB_PASSWORD=123456
 
   web:
     image: nginx:latest
