@@ -6,7 +6,7 @@ use App\Http\Controllers\ClienteController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 
 Route::get('/cliente/criarCadastro', [ClienteController::class, 'listarClientes' ])->name('listarClientes');

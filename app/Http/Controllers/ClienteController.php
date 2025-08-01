@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
@@ -9,11 +7,12 @@ class ClienteController extends Controller
 {
     
     public function listarClientes(){
-        $cliente = Cliente::all();
-        //return
+       return view ('cliente.criarCadastro');
     }
 
     public function criarCliente(Request $request){
+        //Verificar se os dados do form esta indo corretamente:
+        // dd($request->all());
             $request->validate([
                 'nome'=>'required|string|max:150',
                 'data_nascimento' =>'required|date',
@@ -23,10 +22,10 @@ class ClienteController extends Controller
             Cliente::create([
                 'nome' => $request->nome,
                 'data_nascimento' => $request->data_nascimento,
-                'sexo' => $request->sexo
+                'sexo' => $request->sexo,
             ]);
 
-            return view('/welcome');
+            return redirect()->route('welcome')->with('success', 'Cliente cadastrado com sucesso.');
         }
 
     public function editarCliente($id){
