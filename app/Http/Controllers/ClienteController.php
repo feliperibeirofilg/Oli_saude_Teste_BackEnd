@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Cliente;
+use App\Models\Doenca;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -24,9 +25,25 @@ class ClienteController extends Controller
                 'data_nascimento' => $request->data_nascimento,
                 'sexo' => $request->sexo,
             ]);
-
+            
             return redirect()->route('welcome')->with('success', 'Cliente cadastrado com sucesso.');
-        }
+    }
+
+    public function listardoenca(Request $request){
+        return ('doenca.adcdoenca');
+    }
+    public function adcDoenca(Request $request){
+        $request->validate([
+                'nome_doenca' => 'required|string|max:150',
+                'grau_doenca' => 'required|integer|max:2'
+            ]);
+
+            Doenca::create([
+                'nome_doenca' => $request->nome_doenca,
+                'grau_doenca' => $request->grau_doenca
+            ]);
+
+    }
 
     public function editarCliente($id){
             Cliente::findOrFail($id);
@@ -53,13 +70,4 @@ class ClienteController extends Controller
         //Return a view
     }
 
-    public function adcDoenca(Request $request, Cliente $id){
-        Cliente::findOrFail($id);
-
-        $request->validate([
-            'nome_doenca' => 'required|string|max:150',
-            'grau_doenca' => 'required|integer|max:2'
-        ]);
-        
-    }
 }
