@@ -17,8 +17,8 @@
                 <div class="mb-3">
                     <label for="grau_doenca" class="form-label">Grau Doença:</label>
                     <select name="grau_doenca" id="grau_doenca" class="form-select">
-                        <option value="0">1</option>
-                        <option value="1">2</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                     </select>
                 </div>
 
