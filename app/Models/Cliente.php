@@ -12,7 +12,9 @@ class Cliente extends Model
         'data_nascimento'
     ];
 
-    public function doenca(){
-        return $this->hasMany(Doenca::class, 'id_doenca');
+    public function doencas(){
+        return $this->belongsToMany(Doenca::class, 'cliente_doenca', 'cliente_id', 'doenca_id')
+        ->withPivot('grau_doenca')
+        ->withTimestamps();
     }
 }

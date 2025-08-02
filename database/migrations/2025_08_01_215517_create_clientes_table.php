@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('nome');
             $table->date('data_nascimento');
             $table->boolean('sexo');
-            $table->unsignedBigInteger('id_doenca')->nullable();
-            $table->foreign('id_doenca')->references('id_doenca')->on('doencas');
             $table->timestamps();
         });
     }

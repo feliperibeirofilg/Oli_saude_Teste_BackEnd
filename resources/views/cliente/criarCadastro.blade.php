@@ -6,13 +6,13 @@
             @csrf
             <h1>Cadastro Cliente:</h1>
             <div class="mb-3">
-                <label for="nome" class="form-label">
+                <label for="nome" class="form-label">Nome:</label>
                     <input type="text" name="nome" placeholder="Nome do cliente:" class="form-control border border-dark rounded">
                 </label>
             </div>
 
             <div class="mb-3">
-                <label for="data_nascimento" class="form-label">
+                <label for="data_nascimento" class="form-label">Data de nascimento</label>
                     <input type="date" name="data_nascimento" class="form-control border border-dark rounded">
                 </label>
             </div>

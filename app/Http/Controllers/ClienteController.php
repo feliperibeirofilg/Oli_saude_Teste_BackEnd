@@ -13,36 +13,21 @@ class ClienteController extends Controller
 
     public function criarCliente(Request $request){
         //Verificar se os dados do form esta indo corretamente:
-        // dd($request->all());
+        //dd($request->all());
             $request->validate([
                 'nome'=>'required|string|max:150',
                 'data_nascimento' =>'required|date',
                 'sexo' => 'required|boolean'
             ]);
 
-            Cliente::create([
+            $cliente = Cliente::create([
                 'nome' => $request->nome,
                 'data_nascimento' => $request->data_nascimento,
                 'sexo' => $request->sexo,
             ]);
             
-            return redirect()->route('welcome')->with('success', 'Cliente cadastrado com sucesso.');
-    }
-
-    public function listardoenca(Request $request){
-        return ('doenca.adcdoenca');
-    }
-    public function adcDoenca(Request $request){
-        $request->validate([
-                'nome_doenca' => 'required|string|max:150',
-                'grau_doenca' => 'required|integer|max:2'
-            ]);
-
-            Doenca::create([
-                'nome_doenca' => $request->nome_doenca,
-                'grau_doenca' => $request->grau_doenca
-            ]);
-
+            return redirect()->route('doencas',['cliente' => $cliente->id])->with('success', 'Cliente cadastrado com sucesso.');
+            
     }
 
     public function editarCliente($id){

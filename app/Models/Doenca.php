@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Doenca extends Model
 {
-    use Notigiable;
-
     protected $fillable = [
         'nome_doenca',
         'grau_doenca',
     ];
 
     public function clientes(){
-        return $this->belongsTo(Cliente::class, 'id_doenca');
+        return $this->belongsToMany(Cliente::class, 'cliente_doenca', 'doenca_id', 'cliente_id')
+        ->withPivot('grau_doenca')
+        ->withTimestamps();
     }
 
 }

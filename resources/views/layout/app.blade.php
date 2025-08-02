@@ -12,7 +12,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark br-dark px-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <div class="collapse navbar-collapse" id="navbar nav">
             <a href="/" title="Inicio">
                 <img src="resources/img/oli-saude.png" alt="Oli-Saude">
