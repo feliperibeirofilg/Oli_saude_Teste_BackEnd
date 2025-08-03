@@ -1,0 +1,9 @@
+.logo-navbar {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.navbar-brand-group {
+    display: flex;
+    align-items: center;
+}
