@@ -6,9 +6,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Data de Nascimento</th>
-                <th>Sexo</th>
+                <th>Nome:</th>
+                <th>Data de Nascimento:</th>
+                <th>Sexo:</th>
+                <th>Ações:</th>
             </tr>
         </thead>
 
@@ -16,7 +17,7 @@
             @foreach($clientes as $cliente)
             <tr>
                 <td>{{$cliente->nome}}</td>
-                <td>{{$cliente->data_nascimento}}</td>
+                <td>{{ \Carbon\Carbon::parse($cliente->data_nascimento)->format('d/m/Y') }}</td>
                 <td>
                     @if($cliente->sexo === 1)
                     Masculino
@@ -26,6 +27,7 @@
                 </td>
                 <td>
                     <a href="{{ route('editarCliente',['cliente' => $cliente->id]) }}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="#" class="btn btn-primary btn-sm">Excluir</a>
                 </td>
             </tr>
             @endforeach
