@@ -26,7 +26,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{route('listarClientes')}}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{route('visualizarClientes')}}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
     

@@ -13,7 +13,11 @@ class DoencaController extends Controller
         return view('doenca.adcdoenca', compact('cliente'));
     }
 
-     public function adcDoenca(Request $request, Cliente $cliente){
+    public function adcDoenca(Request $request, Cliente $cliente){
+
+            if($request->action === 'finalizar'){
+                    return redirect()->route('visualizarClientes')->with('success', 'Cadastro finalizado com sucessso!');
+                }
         $request->validate([
                 'nome_doenca' => 'required|string'
             ]);
@@ -26,9 +30,6 @@ class DoencaController extends Controller
                 $cliente->doencas()->attach($doenca->id, ['grau_doenca' => $request->grau_doenca]);
             }
 
-            if($request->action === 'finalizar'){
-                return redirect()->route('clientes')->with('success', 'Cadastro finalizado com sucessso!');
-            }
             return redirect()->route('adicionardoenca', ['cliente' => $cliente->id])->with('success', 'Doença adicionada');
     }
 }

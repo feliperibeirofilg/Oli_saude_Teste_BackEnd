@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 class ClienteController extends Controller
 {
     
-    public function listarClientes(){
+    public function cadastrarClientes(){
        return view ('cliente.criarCadastro');
+    }
+
+    public function listarCliente(){
+        $clientes = Cliente::all();
+        return view('cliente.listarClientes', compact ('clientes'));
     }
 
     public function criarCliente(Request $request){
@@ -30,14 +35,13 @@ class ClienteController extends Controller
             
     }
 
-    public function editarCliente($id){
-            Cliente::findOrFail($id);
-            //return com o compact
-            
+    public function editarCliente(Cliente $cliente){
+            return view ('cliente.editarCadastro', compact ('cliente'));
     }
 
-    public function atualizarCliente(Request $request, $id){
-            Cliente::findOrFail($id);
+    public function atualizarCliente(Request $request, Cliente $cliente){
+        //Não é necessario pois o laravel já traz esse objeto.   
+        //Cliente::findOrFail($cliente);
             $request->validate([
                 'nome'=>'required|string|max:150',
                 'data_nascimento' =>'required|date',
@@ -46,7 +50,7 @@ class ClienteController extends Controller
 
             $cliente -> update($request->only(['nome', 'data_nascimento', 'sexo']));
 
-            //return
+            return redirect()->route('visualizarClientes')->with('success', 'Cliente atualizado com sucesso.');
     }
 
     public function buscarCliente($id){
