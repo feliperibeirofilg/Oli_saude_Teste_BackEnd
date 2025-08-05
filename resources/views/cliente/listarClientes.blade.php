@@ -26,8 +26,16 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('editarCliente',['cliente' => $cliente->id]) }}" class="btn btn-primary btn-sm">Editar</a>
-                    <a href="#" class="btn btn-primary btn-sm">Excluir</a>
+                    <a href="{{ route('editarCliente',['cliente' => $cliente->id]) }}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil-fill"></i>
+                    </a>
+                    <form action="{{ route('excluirCliente', ['id'=> $cliente->id]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-link text-danger p-0" onclick="return confirm('Tem certeza que deseja excluir esse cadastro?') title="Excluir">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             @endforeach

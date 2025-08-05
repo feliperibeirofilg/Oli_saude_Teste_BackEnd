@@ -23,6 +23,7 @@
             <a href="/" class="navbar-brand">Inicio</a>
             <a href="/cliente/criarCadastro" class="navbar-brand">Criar Cadastro</a>
             <a href="/cliente/listarClientes" class="navbar-brand">Listar Clientes</a>
+            <a href="/cliente/ordemCliente" class="navbar-brand">Ordenar cliente/score</a>
         </div>
     </nav>
     <div>

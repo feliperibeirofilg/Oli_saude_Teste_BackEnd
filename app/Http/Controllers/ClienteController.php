@@ -59,10 +59,33 @@ class ClienteController extends Controller
         //Return a view
     }
 
-    public function deletarCliente(Request $request $id){
-        $cliente = Cliente::findOrFail($id)
+    public function deletarCliente(Request $request, $id){
+        $cliente = Cliente::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('excluirCliente');
+        return redirect()->route('visualizarClientes');
+    }
+
+    public function ordenarClientes(Cliente $cliente){
+        //Busca clientes com doencas e grau_doenca preenchido.
+        $clientes = Cliente::with('doencas')->get();
+
+        $clientesComScore = $clientes->map(function($cliente){
+            //Soma todos os graus das doencas
+            $somaGraus = $cliente->doencas->sum(function ($doenca){
+                return $doenca->pivot->grau_doenca;
+            });
+
+            $sd = $somaGraus;
+            $score = (1 / (1 + exp(-(-2.8 + $sd)))) * 100;
+
+            $cliente->score = round($score, 2);
+            return $cliente;
+        });
+
+        $clientesOrdenados = $clientesComScore->sortByDesc('score');
+
+        return view('cliente.ordemCliente', compact('clientesOrdenados'));
+        
     }
 
 }
