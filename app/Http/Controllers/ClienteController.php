@@ -59,4 +59,10 @@ class ClienteController extends Controller
         //Return a view
     }
 
+    public function deletarCliente(Request $request $id){
+        $cliente = Cliente::findOrFail($id)
+        $cliente->delete();
+        return redirect()->route('excluirCliente');
+    }
+
 }

@@ -19,3 +19,5 @@ Route::post('/cliente/{cliente}/editarCadastro', [ClienteController::class, 'atu
 
 Route::get('/cliente/{cliente}/doenca/adcdoenca', [DoencaController::class, 'formAdicionarDoenca'])->name('doencas');
 Route::post('/cliente/{cliente}/doenca/adcdoenca', [DoencaController::class, 'adcDoenca'])->name('adicionardoenca');
+
+Route::delete('/cliente//deletar', [ClienteController::class, 'deletarCliente'])->name('excluirCliente');
