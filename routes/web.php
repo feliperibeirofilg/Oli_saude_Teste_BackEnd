@@ -9,7 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/cliente/listarClientes', [ClienteController::class, 'listarCliente' ])->name('visualizarClientes');
+Route::get('/cliente/listarClientes', [ClienteController::class, 'listarCliente'])->name('visualizarClientes');
+Route::get('/cliente/detalheCliente/{id}', [ClienteController::class, 'detalhesClientes'])->name('detalheCadastro');
 
 Route::get('/cliente/criarCadastro', [ClienteController::class, 'cadastrarClientes' ])->name('listarClientes');
 Route::post('/cliente/criarCadastro', [ClienteController::class, 'criarCliente'])->name('cadastrarCliente');

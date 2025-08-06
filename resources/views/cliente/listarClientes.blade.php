@@ -1,4 +1,5 @@
 @extends('layout.app')
+@include('partials.alerts')
 @section('content')
 
     <h2>Lista de clientes</h2>
@@ -27,7 +28,7 @@
                 </td>
                 <td>
                     <a href="{{ route('editarCliente',['cliente' => $cliente->id]) }}" class="btn btn-primary btn-sm">
-                    <i class="bi bi-pencil-fill"></i>
+                        <i class="bi bi-pencil-fill"></i>
                     </a>
                     <form action="{{ route('excluirCliente', ['id'=> $cliente->id]) }}" method="post">
                         @csrf
@@ -36,6 +37,9 @@
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </form>
+                    <a href="{{ route('detalheCadastro',['id' => $cliente->id]) }}" class="btn btn-primary btn-sm">Detalhe
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
                 </td>
             </tr>
             @endforeach

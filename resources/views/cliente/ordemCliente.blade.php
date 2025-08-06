@@ -1,4 +1,5 @@
 @extends('layout.app')
+@include('partials.alerts')
 @section('content')
 
 <h2>Clientes Ordenados por score</h2>

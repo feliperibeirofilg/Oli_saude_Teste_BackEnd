@@ -84,8 +84,13 @@ class ClienteController extends Controller
 
         $clientesOrdenados = $clientesComScore->sortByDesc('score');
 
-        return view('cliente.ordemCliente', compact('clientesOrdenados'));
+        return view('cliente.ordemCliente', compact('clientesOrdenados'))->with('success', 'Clientes ordenados com sucesso.');
         
+    }
+
+    public function detalhesClientes($id){
+        $cliente = Cliente::with('doencas')->findOrFail($id);
+        return view('cliente.detalheCliente', compact('cliente'));
     }
 
 }

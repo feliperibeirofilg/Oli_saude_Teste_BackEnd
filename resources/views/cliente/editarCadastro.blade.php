@@ -1,4 +1,5 @@
 @extends('layout.app')
+@include('partials.alerts')
 @section('content')
 
      <div class="d-flex justify-content-center align-items-center mb-3" style="min-height: 100vh;">
